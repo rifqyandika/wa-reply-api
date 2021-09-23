@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp Api</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .header {
+            margin-top: 30px;
+            flex-direction: column;
+        }
+        .images {
+            /* border: 1px solid; */
+            width: 350px;
+            height: 350px;
+            border-radius: 25px;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .images img {
+            width: 330px;
+            height: 330px;
+        }
+        .navbar {
+            background-color: rgb(8, 8, 44)!important;
+        }
+        .command {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">GALANG GROUP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/data">Data</a>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </nav>
+    <div class="container">
+        <center>
+            <div class="header" id="app">
+                <h2>WHATSAPP ABSENSI</h2>
+                <p>Powered QQ Technology</p>
+                <div class="images shadow">
+                    <img src="" alt="QR-code" id="qrcode">
+                </div>
+                <div class="command">
+                    <div class="alert alert-warning shadow" role="alert">
+                        Command Logs :
+                      </div>
+                      <ul class="logs"></ul>
+                </div>
+            </div>
+        </center>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js" integrity="sha512-2hIBfT6wur46uR5ayhmyICuA8s15BvJhagB+jZImgktQAy832P7EuY8njl1HGp4YS0Sk8DXRo9dByhvD3jfDxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            var socket = io.connect('http://localhost:3030', { path : '/socket.io'})
+            
+            socket.on('message', (msg) => {
+                $('.logs').append($('<li>').text(msg))
+            })
+
+            socket.on('qr', (src) => {
+                $('#qrcode').attr('src', src)
+            })
+        })
+    </script>
+</body>
+</html>
