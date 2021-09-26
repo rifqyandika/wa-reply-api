@@ -137,7 +137,7 @@ client.initialize();
 
 // Socket
 io.on('connection', (socket) => {
-    socket.emit('message', 'Tunggu sampai Barcode muncul...')
+    // socket.emit('message', 'Tunggu sampai Barcode muncul...')
     client.on('qr', (qr) => {
         // console.log('QR RECEIVED', qr);
         qrcode.toDataURL(qr, (err, url) => {
