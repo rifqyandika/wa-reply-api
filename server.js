@@ -11,11 +11,6 @@ const mongoose = require('mongoose')
 const hadirModel = require('./src/models/index')
 const cors = require('cors')
 moment.locale('id');
-const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
-
-browser()
 const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
