@@ -140,7 +140,7 @@ io.on('connection', (socket) => {
     client.on('qr', (qr) => {
         // console.log('QR RECEIVED', qr);
         qrcode.toDataURL(qr, (err, url) => {
-            console.log(url);
+            // console.log(url);
             socket.emit('qr', url)
             socket.emit('message', "Silahkan Scan Whatsapp Web")
         });
